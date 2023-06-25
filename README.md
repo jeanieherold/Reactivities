@@ -17,12 +17,10 @@
 - 3rd Party libraries (some dont have ts definition files)
 - Strict mode is... strict! (really is a good thing)
 
-### somw ts notes
+### some ts notes
 - regarding objects - uses duck typing
 - if it looks like a duck and walks like a duck - it is a duck 
 - same props - same types - same object
-
-#### Some notes
 
 ```
 // not same - methods are not the same
@@ -57,8 +55,8 @@ const duck2: Duck = {
 }
 ```
 
-#### bang operator can be used to override the ts errors ! 
-- makeSound method is options so --> 
+#### bang operator can be used to override the ts errors --> ! 
+- makeSound method is optional so --> 
 ```
 // this will cause ts error since makeSound is possibly undefined (since optional)
 duck1.makeSound('quack);
@@ -131,12 +129,46 @@ builder.Services.AddCors(opt =>
 });
 
 // Add to the middleware section as well
-
-
 // need CORS policy before Authorization
 app.UseCors("CorsPolicy");
 app.UseAuthorization();
 app.MapControllers();
 
+```
+## <React.StrictMode>
 
 ```
+// found in the index.tsx
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+```
+- this will cause http calls to be made twice in development mode
+- can cause some issues with some 3rd party libraries
+- we will leave it on for now but when seeing an unexpected 2nd http call - this is a feature of react strict mode that is verifying all is ok with the call
+
+## Semantic UI React
+
+#### https://react.semantic-ui.com/
+
+- npm install semantic-ui-react semantic-ui-css
+- import in index.tsx - just before the index.css file
+
+```
+import 'semantic-ui-css/semantic.min.css'
+import './index.css';
+```
+
+### Semantic UI will not work well with StrictMode 
+- causes console error that we dont want to see all the time
+```
+Warning: findDOMNode is deprecated in StrictMode. findDOMNode was passed an instance of RefFindNode which is inside StrictMode. Instead, add a ref directly to the element you want to reference. Learn more about using refs safely here: https://reactjs.org/link/strict-mode-find-node
+```
+
+- so turning off strict more for this project
