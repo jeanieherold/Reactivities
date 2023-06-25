@@ -13,15 +13,27 @@ builder.Services.AddDbContext<DataContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+// so we can make api calls from react server to our api server
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+    });
+});
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+// Order of things in middleware section makes a difference! Order Matters
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// need CORS policy before Authorization
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 

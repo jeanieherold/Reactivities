@@ -98,3 +98,45 @@ const ducks = [duck1, duck2];
 - Automatic data object serialization to multipart/form-data and x-www-form-urlencoded body encodings
 - Client side support for protecting against XSRF
 
+## CORS Policy
+#### - error - 
+```
+Access to XMLHttpRequest at 'http://localhost:5000/api/activities' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+Request URL:
+http://localhost:5000/api/activities
+Request Method:
+GET
+Status Code:
+403 Forbidden
+Referrer Policy:
+strict-origin-when-cross-origin
+
+```
+
+- Need to send header back to the API saying this origin is allowed 
+- Need to resolve this in our API
+
+#### In the program.cs (startup file) 
+- Add to Services the AddCors with options
+
+```
+// so we can make api calls from react server to our api server
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:5000");
+    });
+});
+
+// Add to the middleware section as well
+
+
+// need CORS policy before Authorization
+app.UseCors("CorsPolicy");
+app.UseAuthorization();
+app.MapControllers();
+
+
+```
