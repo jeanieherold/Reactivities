@@ -18,8 +18,10 @@ function App() {
   }, []) // adding this [] dependencies will tell it to only fire useEffect once (not strictly true but in general)
   
   return (
-    <div>
-      <Header as='h2' icon='users' content='Reactivities' />
+    <div className="container-fluid p-2">
+      <div className="row">
+        <div className="col">
+        <Header as='h2' icon='users' content='Reactivities' />
         <List>
           {activities.map((activity: any) => (
             <List.Item key={activity.id}>
@@ -27,6 +29,8 @@ function App() {
             </List.Item>
           ))}
         </List>
+        </div>
+      </div>
     </div>
   );
 }

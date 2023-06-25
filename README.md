@@ -172,3 +172,11 @@ Warning: findDOMNode is deprecated in StrictMode. findDOMNode was passed an inst
 ```
 
 - so turning off strict more for this project
+
+### the course is using Semantic UI and I will stick to that but for containers I am going to add bootstrap to make the app responsive
+
+```
+npm install bootstrap
+// in the index.tsx file
+import 'bootstrap/dist/css/bootstrap.css';
+```
