@@ -12,25 +12,21 @@ function App() {
   // what we want react to do when we open up
   useEffect(() => {
     axios.get('http://localhost:5000/api/activities')
-    .then(response => {
-      setActivities(response.data); // this will loop indefinitely unless we add some dependencies
-    })
+      .then(response => {
+        setActivities(response.data); // this will loop indefinitely unless we add some dependencies
+      })
   }, []) // adding this [] dependencies will tell it to only fire useEffect once (not strictly true but in general)
-  
+
   return (
-    <div className="container-fluid p-2">
-      <div className="row">
-        <div className="col">
-        <Header as='h2' icon='users' content='Reactivities' />
-        <List>
-          {activities.map((activity: any) => (
-            <List.Item key={activity.id}>
-              {activity.title}
-            </List.Item>
-          ))}
-        </List>
-        </div>
-      </div>
+    <div className="container-fluid p-4">
+      <Header as='h2' icon='users' content='Reactivities' />
+      <List>
+        {activities.map((activity: any) => (
+          <List.Item key={activity.id}>
+            {activity.title}
+          </List.Item>
+        ))}
+      </List>
     </div>
   );
 }
