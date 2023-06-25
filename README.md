@@ -86,3 +86,15 @@ const ducks = [duck1, duck2];
     </div>
 ))}
 ```
+
+## Axios (instead of fetch)
+- Make XMLHttpRequests from the browser
+- Make http requests from node.js 
+- Supports the Promise API
+- Intercept request and response (Angular has this out of the box)
+- Transform request and response data
+- Cancel requests
+- Automatic transforms for JSON data
+- Automatic data object serialization to multipart/form-data and x-www-form-urlencoded body encodings
+- Client side support for protecting against XSRF
+
